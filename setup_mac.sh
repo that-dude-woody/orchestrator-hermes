@@ -12,7 +12,19 @@ if ! command -v python3 >/dev/null; then
   echo "python3 not found - install Xcode command line tools: xcode-select --install"
   exit 1
 fi
-python3 -m venv .venv 2>/dev/null || true
+if [ ! -x ./.venv/bin/python ]; then
+  echo "    creating .venv ..."
+  if ! python3 -m venv .venv; then
+    echo "  !! python3 -m venv failed."
+    echo "     On macOS this can mean the CLI stub needs Xcode tools:  xcode-select --install"
+    echo "     or Homebrew python without venv support:  brew install python3 && python3 -m venv .venv"
+    exit 1
+  fi
+fi
+if [ ! -x ./.venv/bin/python ]; then
+  echo "  !! .venv/bin/python still missing after creation - aborting."
+  exit 1
+fi
 ./.venv/bin/python -m pip install --quiet --upgrade pip
 ./.venv/bin/python -m pip install --quiet requests
 echo "    $(./.venv/bin/python --version) with requests installed"
