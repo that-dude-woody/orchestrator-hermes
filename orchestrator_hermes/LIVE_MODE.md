@@ -60,6 +60,16 @@ Mac control commands:
   (kickstart historically failed on the engine's Mac; pkill -f run_mac.py
    works - KeepAlive relaunches it)
 
+TRANSFER VIA GIT (the repo is on GitHub: that-dude-woody/orchestrator-hermes,
+private). On the Mac Studio, from the folder you want it in:
+    git clone https://github.com/that-dude-woody/orchestrator-hermes.git
+    cd orchestrator-hermes
+    bash setup_mac.sh
+(gh is already authenticated on the Mac for the engine repo; if plain git
+asks for credentials, run `gh auth login` once there.)
+Databases (memory/learns, hermes_live.db, results.db) are gitignored and
+regenerate at runtime - nothing sensitive is in the repo.
+
 What transfers vs what stays:
   TRANSFER: orchestrator_hermes_main.py, ytel_live_db.py, run_mac.py,
             dashboard_server.py, setup_mac.sh, orchestrator_hermes/
