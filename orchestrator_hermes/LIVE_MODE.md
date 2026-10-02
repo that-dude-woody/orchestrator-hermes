@@ -15,7 +15,7 @@ Run:
 
 WHY "gal" IS RECOMMENDED
 ------------------------
-The production pairing engine (C:\Users\mattix\alt-pairings-re\pairing-engine)
+The production pairing engine (../alt-pairings-re/pairing-engine)
 already syncs ALL of Ytel's SMS history (13 months, ~1.6M outbound + 46.6K
 inbound) into its SQLite db (data/galilaio.db) and has solved the hard
 parts on top of it:
