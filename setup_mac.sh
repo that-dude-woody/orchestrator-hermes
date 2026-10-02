@@ -7,6 +7,21 @@
 set -e
 cd "$(dirname "$0")"
 
+echo "==> 0. git ownership check (fixes 'dubious ownership' errors)"
+# Happens when the clone/copy is owned by a different account than the one running this script
+# (e.g. copied as admin, or moved through Downloads). Add THIS repo to git's safe list.
+GITDIR="$(pwd)"
+if ! git -C "$GITDIR" status >/dev/null 2>&1; then
+  echo "    git reports ownership/config issue -> marking safe: $GITDIR"
+  git config --global --add safe.directory "$GITDIR"
+  if ! git -C "$GITDIR" status >/dev/null 2>&1; then
+    echo "  !! git still failing. Run this once yourself and re-run the script:"
+    echo "     git config --global --add safe.directory '$GITDIR'"
+    exit 1
+  fi
+fi
+echo "    git OK"
+
 echo "==> 1. Python 3 + venv"
 if ! command -v python3 >/dev/null; then
   echo "python3 not found - install Xcode command line tools: xcode-select --install"
