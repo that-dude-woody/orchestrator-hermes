@@ -1,0 +1,23 @@
+# Mac runtime artifacts
+.venv/
+__pycache__/
+*.pyc
+
+# Databases regenerated at runtime (memory/learns by itself; hermes_live.db
+# is rebuilt by ytel_sync; results.db accumulates fresh pairings)
+orchestrator_hermes/memory/*.db
+orchestrator_hermes/memory/*.db-wal
+orchestrator_hermes/memory/*.db-shm
+orchestrator_hermes/dashboard/results.db
+orchestrator_hermes/dashboard/*.log
+
+# Cycles artifacts
+orchestrator_hermes/checkpoint.json
+orchestrator_hermes/final_results.json
+*.log
+
+# Windows-only bits that never run on the Mac
+install.ps1
+hermes_run.log
+hermes_run_err.log
+config.yaml
